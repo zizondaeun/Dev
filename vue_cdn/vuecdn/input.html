@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model.trim="inputNum">
+        <button @click="addHandler">추가</button>
+        <button @click="findHandler">검색</button>
+        <button @click="delHandler">모두삭제</button>
+        <button @click="sortHandler">정렬</button>
+        <div style="height: 200px;">
+            <ul>
+                <li v-for="fruit in arr">{{fruit}}</li>
+            </ul>
+        </div>
+        <script>
+            Vue.createApp({
+                data(){ return {inputNum:'오렌지', arr:['바나나', '사과']}; },
+                methods:{
+                    addHandler(){ 
+                        this.arr.push(this.inputNum) 
+                        this.inputNum = '';
+                    },
+                    findHandler(){
+                        let result = this.arr.find( a => this.inputNum == a);
+                        if(result == undefined){ // == this.inputNum
+                            alert('못찾음')
+                        }else{
+                            alert('찾았다')
+                        }
+                    },
+                    delHandler(){
+                        this.arr = [];
+                    },
+                    sortHandler(){
+                        this.arr.sort((a,b) => {
+                            if(a > b) return 1;
+                            else if(a == b) return 0;
+                            else return -1;
+                        });
+                    }
+                }
+            }).mount('#app')
+        </script>
+    </div>
+</body>
+</html>
