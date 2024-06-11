@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="http://localhost:3000/file/upload" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+          <input type="file" class="form-control-file" name="avatar" multiple><!--파일 여러개 올릴때 multiple-->
+          <input type="file" class="form-control-file" name="sub">
+          <input type="file" class="form-control-file" name="main">
+          <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers">
+          <input type="submit" value="Get me the stats!" class="btn btn-default">            
+        </div>
+      </form>
+</body>
+</html>

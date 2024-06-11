@@ -18,3 +18,5 @@ console.log('type', os.type());
 console.log('homedir', os.homedir());
 
 //end(package.json에서 "start" : "node process.js",)
+
+console.log('username', process.env.username); //환경변수 불러오는거

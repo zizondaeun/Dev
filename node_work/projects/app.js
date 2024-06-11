@@ -2,9 +2,16 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const boardRouter = require('./routes/board.js'); //내가 만든거면 ./
 const customerRouter = require('./routes/customer.js');
+const fileRouter = require('./routes/file.js');
+const todoRouter = require('./routes/todo.js');
+const cors = require('cors');
+const morgan = require('morgan');
+
 const app = express();
 const port = 3000;
 
+app.use(morgan(':date :method :url :status'));
+app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({extended : false}));
 app.use(express.json());
@@ -18,6 +25,8 @@ app.use(requestTime);
 
 app.use("/board", boardRouter);
 app.use("/customer", customerRouter);
+app.use("/file", fileRouter);
+app.use("/todo", todoRouter);
 
     //method(.get) path("/") handler(req,res)
 app.get("/", (req, res) => {
