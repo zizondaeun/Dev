@@ -6,6 +6,10 @@ router.get('/', (req, res) => {
     query("todoList")
     .then(result => res.send(result))
 });
+router.get("/:no", (req, res) => {
+    query("todoGet", req.params.no)
+    .then(result => res.send(result))
+});
 router.post('/', (req, res) => {
     console.log(req.body);
     query("todoInsert", req.body)

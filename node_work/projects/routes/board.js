@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const query = require("../mysql/index"); //
+const query = require("../mysql/index"); 
+
+const multer = require('multer');
+const upload = multer({ dest: 'd:/upload/' });
 
 // let no = 2;
 // board = [{
@@ -62,10 +65,10 @@ router.get("/:no", (req, res) => {
     query("boardGet", req.params.no)
     .then(result => res.send(result))
 });
-router.post("/", (req, res) => {
-    query("boardInsert", req.body)
-    .then(result => res.send(result))
-});
+// router.post("/", (req, res) => {
+//     query("boardInsert", req.body)
+//     .then(result => res.send(result))
+// });
 router.put("/:no", (req, res) => {
     query("boardUpdate", [req.body, req.params.no])
     .then(result => res.send(result))
@@ -74,18 +77,18 @@ router.delete("/:no", (req, res) => {
     query("boardDelete", req.params.no)
     .then(result => res.send(result))
 });
-//과제
-const multer = require('multer');
-const upload = multer({ dest: 'd:/upload/' });
 
-// router.post("/", upload.single("XXXX"), (req, res) => {
-//     //첨부파일이 있으면
-//     let data = {...req.body};
-//     if(data != null){
-//         data.filename = req.file.XXXXX
-//         //data.uploadfilename = ;
-//     }
-// })
+//과제(첨부파일 삽입)
+router.post("/", upload.single('avatar'), (req, res) => {
+    //첨부파일이 있으면
+    let data = {...req.body};
+    if(req.file != null){
+        data.filename = req.file.originalname;
+        data.uploadfilename = req.file.filename;
+    }
+    query("boardInsert", data)
+    .then(result => res.send(result))
+});
 
 
 module.exports = router;

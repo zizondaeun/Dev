@@ -22,7 +22,7 @@ const requestTime = function(req, res, next){
 }
 
 app.use(requestTime);
-
+//서버 실행시키기 위함
 app.use("/board", boardRouter);
 app.use("/customer", customerRouter);
 app.use("/file", fileRouter);
