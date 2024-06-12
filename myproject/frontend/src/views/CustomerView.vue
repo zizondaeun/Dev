@@ -14,11 +14,11 @@
         <tbody>
             <tr v-for="customer in customers">
                 <td>{{customer.id}}</td>
-                <td @click="">{{customer.name}}</td>
+                <td @click="infoHandler(customer.id)">{{customer.name}}</td>
                 <td>{{customer.email}}</td>
                 <td>{{customer.phone}}</td>
                 <td>{{customer.address}}</td>
-                <td><button @click="delHandler">삭제</button></td>
+                <td><button @click="delHandler(customer.id)">삭제</button></td>
             </tr>
         </tbody>
     </table>
@@ -29,7 +29,7 @@
     export default {
     data(){
     return{
-        customers : []
+        customers : [], customer : {}
     };
     },
     created(){
@@ -39,10 +39,22 @@
         .then(json => {this.customers = json.data })
     },
     methods : {
-        delHandler(){
-
+        async delHandler(id){
+            console.log(id);
+            await axios.delete('/api/customer/' + id)
+            .then( json => {  //this.$router.get("/customer")
+                let data = this.customers.filter(a => a.id != id)
+                console.log(data)
+                this.customers = data;
+                
+            });
+        },
+        infoHandler(id){
+            this.$router.push({
+                name: 'customerInfo' , query: {id: id}
+            });
         }
-    }
+    } 
     }
 </script>
 <style>

@@ -26,7 +26,11 @@ const routes = [
     name: 'customerForm',
     component: () => import(/* webpackChunkName: "customerForm" */ '../views/CustomerForm.vue')
   },
-
+  {
+    path: '/customerInfo',
+    name: 'customerInfo',
+    component: () => import(/* webpackChunkName: "customerInfo" */ '../views/CustomerInfo.vue')
+  },
 ]
 
 const router = createRouter({

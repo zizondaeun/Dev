@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const query = require("../mysql/index") // /index생략가능
+const query = require("../mysql/index"); // /index생략가능
 
 router.get('/', (req, res) => {
     query("customerList")
+    .then(result => res.send(result))
+    //res.send('customer 라우트 루트')
+});
+
+router.get('/:id', (req, res) => {
+    query("customerGet", req.params.id)
     .then(result => res.send(result))
     //res.send('customer 라우트 루트')
 });
