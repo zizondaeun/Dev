@@ -1,42 +1,58 @@
 <template>
-    <div>
-        <h1>고객관리</h1>
-    </div>
-    <div>
-        <button><router-link to="/customerForm">고객등록</router-link></button>
-    </div>
-    <table>
-        <thead>
-        <tr>
-            <th>id</th><th>name</th><th>email</th><th>phone</th><th>address</th><th>delete</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr v-for="customer in customers">
-                <td>{{customer.id}}</td>
-                <td @click="infoHandler(customer.id)">{{customer.name}}</td>
-                <td>{{customer.email}}</td>
-                <td>{{customer.phone}}</td>
-                <td>{{customer.address}}</td>
-                <td><button @click="delHandler(customer.id)">삭제</button></td>
+    <div>고객관리</div>
+    <div class="row">
+        <div class="col-md-12 col-lg-7 border p-3">
+            <select v-model="pageUnit" @change="goPage(1)">
+                <option>3</option>
+                <option>5</option>
+                <option>10</option>
+            </select>
+        <!--
+        <div class="p-3">
+            <button><router-link to="/customerForm">고객등록</router-link></button>
+        </div>-->
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>id</th><th>name</th><th>email</th><th>phone</th><th>address</th><th>delete</th>
             </tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <tr v-for="customer in customers">
+                    <td>{{customer.id}}</td>
+                    <td @click="infoHandler(customer.id)">{{customer.name}}</td>
+                    <td @click="updateHandler(customer)">{{customer.email}}</td>
+                    <td>{{customer.phone}}</td>
+                    <td>{{customer.address}}</td>
+                    <td><button @click="delHandler(customer.id)" class="btn btn-success">삭제</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <PagingComponent v-bind="page" @go-page="goPage"/>
+        </div>    
+        <div class="col-md-12 col-lg-5 border p-3">
+            <CustomerForm :customerdata="customer" ref="CustomerForm"></CustomerForm><!-- v-bind="customers"-->
+        </div>
+    </div>
 </template>
 <script>
+    import PageMixins from '../mixins.js';
     import axios from 'axios';
+    import PagingComponent from '@/components/PagingComponent.vue';
+    import CustomerForm from '@/views/CustomerForm.vue';
 
     export default {
+        mixins : [PageMixins],
+        components : {
+            PagingComponent, CustomerForm
+        },
     data(){
-    return{
-        customers : [], customer : {}
-    };
+        return{
+            customers : [], customer : {}, page : {}, pageUnit : 5
+        };
     },
     created(){
-        //프론트에서는 원래가지고있던 포트를 보여줘야하기때문에
-        const url = '/api/customer'; //http://localhost:8080/customer
-        axios.get(url)
-        .then(json => {this.customers = json.data })
+        this.goPage(1);
     },
     methods : {
         async delHandler(id){
@@ -46,16 +62,26 @@
                 let data = this.customers.filter(a => a.id != id)
                 console.log(data)
                 this.customers = data;
-                
             });
         },
         infoHandler(id){
             this.$router.push({
                 name: 'customerInfo' , query: {id: id}
             });
-        }
+        },
+        updateHandler(customer){
+            this.customer = customer; //-> props => data
+            //this.$refs.CustomerForm.customers = {... customer};
+        },
+        async goPage(page){
+                let pageUnit = this.pageUnit;
+                let result = await axios.get(`/api/customer?pageUnit=${pageUnit}&page=${page}`);
+                this.customers = result.data.list;
+                this.page = this.pageCalc(page, result.data.count, 5, pageUnit)
+                console.log(this.page);
+            }
+        },
     } 
-    }
 </script>
 <style>
     span{
