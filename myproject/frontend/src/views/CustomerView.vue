@@ -31,7 +31,7 @@
         <PagingComponent v-bind="page" @go-page="goPage"/>
         </div>    
         <div class="col-md-12 col-lg-5 border p-3">
-            <CustomerForm :customerdata="customer" ref="CustomerForm"></CustomerForm><!-- v-bind="customers"-->
+            <CustomerForm :customerdata="customer" ref="CustomerForm" @go-page="goPage"></CustomerForm><!-- v-bind="customers"-->
         </div>
     </div>
 </template>
@@ -70,7 +70,7 @@
             });
         },
         updateHandler(customer){
-            this.customer = customer; //-> props => data
+            this.customer = customer; //-> props => data /this.cus는 데이터안의 cus이고 =뒤의 cus 위의 for의 cus
             //this.$refs.CustomerForm.customers = {... customer};
         },
         async goPage(page){

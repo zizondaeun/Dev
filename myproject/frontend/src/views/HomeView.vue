@@ -39,9 +39,9 @@
     <hr />
     <PagingComponent v-bind="page" @go-page="goPage"/>
     
-    <hr />
+    <!-- <hr />
       count : {{ count }}
-      <button type="button" @click="increment">store count 증가</button>
+      <button type="button" @click="increment">store count 증가</button> -->
   </div><!--HelloWorld가 자식-->
 </template>
 
