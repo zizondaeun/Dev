@@ -23,16 +23,16 @@
     import axios from 'axios';
 
     export default {
-    data(){
-    return{
-        board : {}
-    };
-    },
-    created(){
-        axios.get('/api/board/' + this.$route.query.no)
-        .then(json => this.board = json.data[0])
-    },
-    methods : {
-    }
+        data(){
+        return{
+            board : {}
+        };
+        },
+        created(){
+            axios.get('/api/board/' + this.$route.query.no)
+            .then(json => this.board = json.data[0])
+        },
+        methods : {
+        }
     }
 </script>
