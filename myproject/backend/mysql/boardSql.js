@@ -1,6 +1,6 @@
 //쿼리문 mapper.xml처럼 여기에 모아
 module.exports = {
-    boardList : 'select * from board order by no limit ?, ?', //페이징
+    boardList : 'select * from board order by no desc limit ?, ?', //페이징
     boardCount : 'select count(*) cnt from board', 
     boardGet : 'select * from board where no = ?', //단건 조회
     boardInsert : 'insert into board set ?',

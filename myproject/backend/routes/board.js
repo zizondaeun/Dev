@@ -95,15 +95,17 @@ router.delete("/:no", (req, res) => {
 });
 
 //과제(첨부파일 삽입)
-router.post("/", upload.single('avatar'), (req, res) => {
+router.post("/", upload.single('file'), (req, res) => {
     //첨부파일이 있으면
-    let data = {...req.body};
+    let data = JSON.parse(req.body.board);
+    console.log(data);
     if(req.file != null){
         data.filename = req.file.originalname;
         data.uploadfilename = req.file.filename;
-    }
+        }
     query("boardInsert", data)
     .then(result => res.send(result))
+    .catch(err => res.send(err))
 });
 
 module.exports = router;
