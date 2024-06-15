@@ -17,6 +17,7 @@
             </tr>
         </tbody>
     </table>
+    <img src="D:/upload/1bb37f80bc371432ae271c32dbbf194a">
 </template>
 <script>
     import axios from 'axios';
