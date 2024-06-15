@@ -5,7 +5,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>no</th><th>title</th><th>writer</th><th>content</th>
+                <th>no</th><th>title</th><th>writer</th><th>content</th><th>file</th>
             </tr>
         </thead>
         <tbody>
@@ -14,10 +14,10 @@
                 <td>{{board.title}}</td>
                 <td>{{board.writer}}</td>
                 <td>{{board.content}}</td>
+                <td><img src="#">{{board.filename}}</td>
             </tr>
         </tbody>
     </table>
-    <img src="D:/upload/1bb37f80bc371432ae271c32dbbf194a">
 </template>
 <script>
     import axios from 'axios';
