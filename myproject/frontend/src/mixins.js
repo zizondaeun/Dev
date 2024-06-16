@@ -10,7 +10,7 @@ export default{
                 endIdx = lastPage;
             }
             console.log(currentPage, firstPage, lastPage, startIdx, endIdx);
-            return { currentPage, firstPage, lastPage, startIdx, endIdx };
+            return { firstPage, lastPage, startIdx, endIdx };
         }
     }
 }

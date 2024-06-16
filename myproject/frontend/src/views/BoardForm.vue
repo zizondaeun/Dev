@@ -16,7 +16,7 @@
         <input type="file" ref="file" v-on:change="onChangeFileUpload()">
     </div>
     <div>
-        <button class="btn btn-secondary" @click="addHandler">등록</button>
+        <button class="btn btn-secondary" @click="addHandler" v-if="account">등록</button>
         <button class="btn btn-danger" @click.prevent="cancelHandler">취소</button>
     </div>
 </template>
@@ -28,6 +28,11 @@
             return{
                 board : {}, file : {}
             };
+        },
+        computed :{
+            account(){
+                return this.$store.state.user.userid; //store.js에 있는 user임 
+            }
         },
         created(){
 

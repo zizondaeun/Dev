@@ -74,11 +74,15 @@
             //this.$refs.CustomerForm.customers = {... customer};
         },
         async goPage(page){
-                let pageUnit = this.pageUnit;
-                let result = await axios.get(`/api/customer?pageUnit=${pageUnit}&page=${page}`);
-                this.customers = result.data.list;
-                this.page = this.pageCalc(page, result.data.count, 5, pageUnit)
-                console.log(this.page);
+                try{
+                    let pageUnit = this.pageUnit;
+                    let result = await axios.get(`/api/customer?pageUnit=${pageUnit}&page=${page}`);
+                    this.customers = result.data.list;
+                    this.page = this.pageCalc(page, result.data.count, 5, pageUnit)
+                    console.log(this.page);
+                }catch(err){
+                    console.log(err);
+                }
             }
         },
     } 
