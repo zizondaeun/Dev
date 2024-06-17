@@ -1,8 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import VuetifyView from '../views/VuetifyView.vue'
+import DataBinding from '../components/CompositionDataBinding.vue'
+import CompositionMouse from '../views/CompositionMouse.vue'
 //import CustomerView from '../views/CustomerView.vue' //import!!!!잊지말자...
 
 const routes = [
+  {
+    path: '/compositionMouse',
+    name: 'compositionMouse',
+    component: CompositionMouse
+  },
+  {
+    path: '/composition',
+    name: 'composition',
+    component: DataBinding
+  },
+  {
+    path: '/vuetify',
+    name: 'vuetify',
+    component: () => import(/* webpackChunkName: "vuetify" */ '../views/VuetifyView.vue')
+  },
   {
     path: '/',
     name: 'home',

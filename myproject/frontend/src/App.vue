@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <nav>
+      <router-link to="/compositionMouse">CompositionMouse</router-link> |
+      <router-link to="/composition">Composition</router-link> |
+      <router-link to="/vuetify">Vuetify</router-link> |
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/customer">Customer</router-link> |
