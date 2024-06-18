@@ -1,5 +1,4 @@
 <template>
-    <MenuBar/>
     <div>게시판</div>
     <div class="row">
         <div class="col-md-12 border p-3">
@@ -20,18 +19,12 @@
             </table>
         </div>    
     </div>
-    <FooterTitle></FooterTitle>
 </template>
 <script>
     import axios from 'axios';
     import _ from 'lodash';
-    import MenuBar from '@/components/MenuBar.vue'
-    import FooterTitle from '@/components/FooterTitle.vue'
 
     export default {
-        components : {
-            MenuBar, FooterTitle
-        },
         data(){
             return{
                 board : []

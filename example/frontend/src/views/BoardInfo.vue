@@ -1,5 +1,4 @@
 <template>
-    <MenuBar></MenuBar>
     <div><h4>게시글 상세</h4></div>
     <div class="mb-3 p-2">
         <label for="exampleFormControlInput1" class="form-label">제목</label>
@@ -17,17 +16,14 @@
     <div>
         <ReplyView></ReplyView>
     </div>
-    <FooterTitle></FooterTitle>
 </template>
 <script>
     import axios from 'axios';
-    import MenuBar from '@/components/MenuBar.vue';
-    import FooterTitle from '@/components/FooterTitle.vue';
     import ReplyView from '@/components/ReplyView.vue'
 
     export default {
         components: {
-            MenuBar, FooterTitle, ReplyView
+            ReplyView
         },
         data(){
             return{

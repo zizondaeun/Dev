@@ -1,12 +1,24 @@
 <template>
   <nav>
+    <MenuBar></MenuBar>
     <router-link to="/"><button class="btn btn-outline-primary">Home</button></router-link> |
     <router-link to="/board"><button class="btn btn-outline-primary">전체조회</button></router-link> | 
     <router-link to="/boardForm"><button class="btn btn-outline-primary">글 등록</button></router-link> 
   </nav>
   <router-view/>
+  <FooterTitle></FooterTitle>
 </template>
+<script>
+  import MenuBar from './components/MenuBar.vue';
+  import FooterTitle from './components/FooterTitle.vue';
+  
 
+  export default {
+        components: {
+          MenuBar, FooterTitle
+        },
+      }
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

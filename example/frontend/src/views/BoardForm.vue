@@ -1,7 +1,5 @@
 <template>
-    <MenuBar></MenuBar>
     <div><h4>게시글 등록</h4></div>
-    
     <div class="mb-3 p-2">
         <label for="exampleFormControlInput1" class="form-label">이름</label>
         <input type="text" class="form-control" id="writer" v-model="board.writer">
@@ -18,17 +16,11 @@
         <button class="btn btn-secondary" @click="addHandler">등록</button>
         <button class="btn btn-danger" @click.prevent="cancelHandler">취소</button>
     </div>
-    <FooterTitle></FooterTitle>
 </template>
 <script>
     import axios from 'axios';
-    import MenuBar from '@/components/MenuBar.vue';
-    import FooterTitle from '@/components/FooterTitle.vue';
 
     export default {
-        components: {
-            MenuBar, FooterTitle
-        },
         data(){
             return{
                 board : {}
