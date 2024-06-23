@@ -69,6 +69,11 @@ const routes = [
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/LoginForm.vue')
   },
+  {
+    path: '/order',
+    name: 'order',
+    component: () => import(/* webpackChunkName: "order" */ '../views/OrderView.vue')
+  },
 ]
 
 const router = createRouter({

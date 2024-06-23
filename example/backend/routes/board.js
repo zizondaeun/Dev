@@ -15,7 +15,8 @@ router.get("/:no", (req, res) => {
 //게시글 등록
 router.post("/", (req, res) => {
     query("boardInsert", req.body)
-    .then(result => res.send(result))
+    .then(result => console.log(result))
+    //res.send(result)
 });
 //게시글 삭제
 router.delete("/:no", (req, res) => {

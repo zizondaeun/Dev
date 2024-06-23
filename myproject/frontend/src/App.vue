@@ -8,7 +8,8 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/customer">Customer</router-link> |
       <router-link to="/board">Board</router-link> |
-      <router-link to="/login">Login</router-link> 
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/order">Order</router-link> 
     </nav>
     <router-view/>
   </div>
