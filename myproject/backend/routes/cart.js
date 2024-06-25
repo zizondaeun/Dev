@@ -14,5 +14,10 @@ router.delete("/:no", (req, res) => {
     //console.log(req.params, '확인')
     .then(result => res.send(result))
 })
+//전체 장바구니 삭제
+router.delete("/", (req, res) => { 
+    query("cartAllDelete", 1) //유저 no로 받아오는 값을 넣어줘야해
+    .then(result => res.send(result))
+})
 
 module.exports = router;

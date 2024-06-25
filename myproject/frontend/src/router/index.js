@@ -79,6 +79,11 @@ const routes = [
     name: 'cart',
     component: () => import(/* webpackChunkName: "cart" */ '../views/CartView.vue')
   },
+  {
+    path: '/orderForm',
+    name: 'orderForm',
+    component: () => import(/* webpackChunkName: "orderForm" */ '../views/OrderForm.vue')
+  },
 ]
 
 const router = createRouter({

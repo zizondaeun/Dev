@@ -10,19 +10,24 @@
             <tbody>
                 <tr v-for="c in cart">
                     <td>{{ c.CART_NO }}</td>
-                    <td><input type="checkbox" v-model="checks" @change="selected($event)"></td>
+                    <td><input type="checkbox" v-model="c.selected" @change="AllChecked"></td>
                     <td>{{ c.PROD_NO }}</td>
                     <td><img src=""></td>
                     <td>{{ c.PROD_NAME }}</td>
                     <td><input type="number" v-model="c.CNT" min='1' max='10'></td>
                     <td>{{ c.PRICE }}</td>
-                    <td><button @click="orderHandler(c.PROD_NO)" class="btn btn-primary">주문하기</button><button @click="delHandler(c.CART_NO)" class="btn btn-warning">삭제하기</button></td>
+                    <td>
+                        <button @click="delSel(c.CART_NO)" class="btn btn-warning">삭제하기</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
         <div>
-            <button @click="selDel(c.CART_NO)" class="btn btn-primary">선택삭제</button>
-            <button @click="allDel" class="btn btn-primary">전체삭제</button>
+            <button @click="delAll" class="btn btn-warning">전체삭제</button>
+        </div>
+        <div>
+            <button @click="orderSel" class="btn btn-primary">선택주문</button>
+            <button @click="orderAll" class="btn btn-primary">전체주문</button>
         </div>
     </div>
 </template>
@@ -36,44 +41,45 @@
             };   
         },
         created(){
-            axios.get('/api/cart/')
-            .then(result => {
-                console.log(result)
-                this.cart = result.data
-                //console.log(this.cart)
-            })
+            this.getCart();
         },
         methods : {
-            async delHandler(no){
-                await axios.delete(`/api/cart/${no}`)
-                this.$router.push({path : '/cart'});
+            getCart(){
+                axios.get('/api/cart/')
+                .then(result => {
+                    console.log(result)
+                    this.cart = result.data
+                    //console.log(this.cart)
+                })
             },
-            orderHandler(pno){
+            async delSel(no){
+                await axios.delete(`/api/cart/${no}`)
+                .then(this.getCart()); //db에서 삭제처리된 리스트를 불러옴
+                //this.$router.push({path : '/cart'});
+            },
+            delAll(){
+                axios.delete('/api/cart/')
+                .then(this.getCart()); 
+                //this.$router.push('/cart')
+            },
+            orderSel(){
+                let selectedCart = [];
+                this.cart.forEach( a => {
+                    if(a.selected){
+                        selectedCart.push(a);
+                    }
+                })
+                this.$router.push({
+                    path: '/orderForm',
+                    query: { Cart: JSON.stringify(selectedCart) }
+                });
+            },
+            orderAll(){
 
             },
             checkedAll(checked){
-                this.allChecked = checked
-                for(let i in this.cart){
-                    this.cart[i].selected = this.allChecked;
-                }
+                this.cart.forEach(a => a.selected = checked);
             },
-            selected(e){
-                for (let i in this.cart){
-                    if(! this.cart[i].selected){
-                        this.allChecked = false;
-                        return;
-                    }else{
-                        this.allChecked = true;
-                    }
-                }
-            },
-            selDel(no){
-                axios.delete(`/api/cart/${no}`)
-                this.$router.push('/cart')
-            },
-            allDel(){
-
-            }
         }
     }
 </script>
