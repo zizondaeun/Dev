@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var customerRouter = require('./routes/customer');
 var boardRouter = require('./routes/board');
 var orderRouter = require('./routes/order');
+var cartRouter = require('./routes/cart');
 
 var app = express();
 
@@ -41,7 +42,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/customer', customerRouter); //패치주소랑 일치시켜야해서 api
 app.use('/api/board', boardRouter);
-app.use('/api/order', orderRouter)
+app.use('/api/order', orderRouter);
+app.use('/api/cart', cartRouter);
 
 const members = [
   { userid: "user1", userpw: "1111" },
