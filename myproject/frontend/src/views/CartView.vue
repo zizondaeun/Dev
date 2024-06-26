@@ -57,9 +57,9 @@
                 .then(this.getCart()); //db에서 삭제처리된 리스트를 불러옴
                 //this.$router.push({path : '/cart'});
             },
-            delAll(){
-                axios.delete('/api/cart/')
-                .then(this.getCart()); 
+            async delAll(){
+                await axios.delete('/api/cart/')
+                .then(() => this.getCart()); //괄호
                 //this.$router.push('/cart')
             },
             orderSel(){
