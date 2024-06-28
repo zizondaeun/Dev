@@ -97,7 +97,4 @@
     }
 </script>
 <style>
-    .container{
-        
-    }
 </style>
