@@ -47,7 +47,7 @@
             valid: {
                         email: false
                     }
-                    }
+        }
 
     },
     watch : {
@@ -56,7 +56,7 @@
         },
         'customers.email': function() {
             this.checkEmail()
-            }
+        }
     },
     created(){
         this.customers = this.customerdata;
