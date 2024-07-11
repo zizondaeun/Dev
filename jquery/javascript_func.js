@@ -31,11 +31,12 @@
         let trList = document.querySelectorAll('tbody > tr');
         for(let tr of trList){
           tr.addEventListener('click', function(e){
+            if(e.target.tagName == 'SELECT') return; //select태그에 이벤트 동작 막는거 .stop
             console.log('target Tag', e.target);
             console.log('currentTarget Tag', e.currentTarget);
           })
         }
-        
+
         // + 버튼
         document.getElementById('insertBtn')
                 .addEventListener('click', insertTrTag);
