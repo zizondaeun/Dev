@@ -49,6 +49,11 @@
       // 추가될 <tr/> 생성 및 등록
       function insertTrTag(event){
         let trTag = document.createElement('tr');
+        tr.addEventListener('click', function(e){
+          if(e.target.tagName == 'SELECT') return; //select태그에 이벤트 동작 막는거 .stop
+          console.log('target Tag', e.target);
+          console.log('currentTarget Tag', e.currentTarget);
+        })
         
         //체크박스
         let tdTag = createTdTag('checkbox');
