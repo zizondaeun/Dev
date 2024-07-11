@@ -2,12 +2,12 @@
     /*
       -- 메소드
       document.getElementById()
-      document.getElementsByTagName()
-      document.getElementsByName()
-      document.getElementsByClassName()
+      document.getElementsByTagName()   : 배열
+      document.getElementsByName()      : 배열
+      document.getElementsByClassName() : 배열
 
       document.querySelector()
-      document.querySelectorAll()
+      document.querySelectorAll()       : 배열
 
       -- 관계 관련 속성
       부모 : parentElement
@@ -16,11 +16,30 @@
 
     */
    
-      document.addEventListener('DOMContentLoaded', function(e){
+      document.addEventListener('DOMContentLoaded', function(event){
+        /*
+          -- 필드                  .self(event.target == event.currentTarget)
+          event.target;            //고정
+          event.currentTarget;     //유동 => 이벤트 핸들러가 등록된 태그
 
+          -- 메소드 .prevent, .stop
+          event.preventDefault();  //각 이벤트의 기본 동작을 일시정지
+          event.stopPropagation(); //이벤트 버블링을 정지
+
+        */
+
+        let trList = document.querySelectorAll('tbody > tr');
+        for(let tr of trList){
+          tr.addEventListener('click', function(e){
+            console.log('target Tag', e.target);
+            console.log('currentTarget Tag', e.currentTarget);
+          })
+        }
+        
+        // + 버튼
         document.getElementById('insertBtn')
                 .addEventListener('click', insertTrTag);
-      
+        // 전송 버튼
         document.getElementById('ajaxBtn')
                 .addEventListener('click', ajaxData);
       
