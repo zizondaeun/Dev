@@ -9,18 +9,19 @@
       document.querySelector()
       document.querySelectorAll()       : 배열
 
-      -- 관계 관련 속성
+      ========================= /필드로 접근 가능
+      -- 관계 관련 속성 
       부모 : parentElement
       자식 : children, firstElementChild, lastElementChild
       형제 : previousElementSibling, nextElementSibling
 
     */
    
-      document.addEventListener('DOMContentLoaded', function(event){
+      document.addEventListener('DOMContentLoaded', function(event){ //DOM이 완성되는 경우 수행할 코드
         /*
           -- 필드                  .self(event.target == event.currentTarget)
-          event.target;            //고정
-          event.currentTarget;     //유동 => 이벤트 핸들러가 등록된 태그
+          event.target;            //고정(바뀌지않음)
+          event.currentTarget;     //유동(거슬러올라가는 .. 바뀔수있는) => 이벤트 핸들러가 등록된 태그(내가 등록한) / this.는 currentTarget을 의미함.
 
           -- 메소드 .prevent, .stop
           event.preventDefault();  //각 이벤트의 기본 동작을 일시정지
@@ -28,7 +29,7 @@
 
         */
 
-        let trList = document.querySelectorAll('tbody > tr');
+        let trList = document.querySelectorAll('tbody > tr'); //배열타입에서는 for문 돌려야함
         for(let tr of trList){
           tr.addEventListener('click', function(e){
             if(e.target.tagName == 'SELECT') return; //select태그에 이벤트 동작 막는거 .stop
@@ -49,7 +50,7 @@
       // 추가될 <tr/> 생성 및 등록
       function insertTrTag(event){
         let trTag = document.createElement('tr');
-        tr.addEventListener('click', function(e){
+        trTag.addEventListener('click', function(e){ //tr에서 trTag로 변경
           if(e.target.tagName == 'SELECT') return; //select태그에 이벤트 동작 막는거 .stop
           console.log('target Tag', e.target);
           console.log('currentTarget Tag', e.currentTarget);
@@ -64,11 +65,11 @@
         tdTag.textContent = getNextNo();
         trTag.append(tdTag);
       
-        //아이디
+        //아이디(type,name)
         tdTag = createTdTag('text', 'id');
         trTag.append(tdTag);
       
-        //비밀번호
+        //비밀번호(type,name)
         tdTag = createTdTag('password', 'password');
         trTag.append(tdTag);
         
